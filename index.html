@@ -21,12 +21,13 @@
     --line-strong:  #9AA290;   /* heavier rules (subtotal/total dividers) */
     --primary:      #23543F;   /* forest-green — brand, section numerals, headers */
     --positive:     #2F7A57;   /* savings / "novated lease wins" */
-    --negative:     #A6472B;   /* cost / "alternative wins" — rust, not the common terracotta */
+    --negative:     #A6472B;   /* cost / "alternative wins" */
     --highlight:    #C98A2C;   /* amber — focus states, active toggle */
+    --guide-bg:     #E3E8DF;   /* background for the new user guide */
     --radius: 6px;
     --serif: "Source Serif 4", Georgia, serif;
-    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-    --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", monospace;
   }
 
   *{ box-sizing: border-box; }
@@ -40,16 +41,14 @@
     padding: 0 0 4rem;
   }
 
-  /* Respect reduced-motion preferences */
   @media (prefers-reduced-motion: reduce){
     *{ transition: none !important; animation: none !important; scroll-behavior: auto !important; }
   }
 
   a{ color: var(--primary); }
-
   .page{ max-width: 1180px; margin: 0 auto; padding: 0 1.25rem; }
 
-  /* ============================= HEADER ============================= */
+  /* ============================= HEADER & GUIDE ============================= */
   header.masthead{
     padding: 2.75rem 0 1.75rem;
     border-bottom: 3px double var(--line-strong);
@@ -76,6 +75,24 @@
     font-size: 0.98rem;
   }
 
+  .guide-card {
+    background: var(--guide-bg);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+  }
+  .guide-card h2 {
+    font-family: var(--serif);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+  }
+  .guide-card ul { padding-left: 1.2rem; margin-bottom: 0; }
+  .guide-card li { margin-bottom: 0.5rem; }
+  .guide-card li strong { color: var(--primary); }
+
   /* ============================= LAYOUT ============================= */
   .layout{
     display: grid;
@@ -84,9 +101,7 @@
     align-items: start;
     margin-top: 2rem;
   }
-  @media (max-width: 900px){
-    .layout{ grid-template-columns: 1fr; }
-  }
+  @media (max-width: 900px){ .layout{ grid-template-columns: 1fr; } }
 
   /* ============================= FORM ============================= */
   .form-panel section.card{
@@ -97,204 +112,86 @@
     margin-bottom: 1.25rem;
   }
   .section-head{
-    display:flex;
-    align-items: baseline;
-    gap: 0.6rem;
+    display:flex; align-items: baseline; gap: 0.6rem;
     border-bottom: 1px solid var(--line);
-    padding-bottom: 0.6rem;
-    margin-bottom: 1.1rem;
+    padding-bottom: 0.6rem; margin-bottom: 1.1rem;
   }
   .section-num{
-    font-family: var(--mono);
-    font-size: 0.85rem;
-    color: var(--paper-raised);
-    background: var(--primary);
-    width: 1.6rem; height: 1.6rem;
-    border-radius: 50%;
-    display: inline-flex; align-items:center; justify-content:center;
-    flex: none;
+    font-family: var(--mono); font-size: 0.85rem; color: var(--paper-raised);
+    background: var(--primary); width: 1.6rem; height: 1.6rem;
+    border-radius: 50%; display: inline-flex; align-items:center; justify-content:center; flex: none;
   }
-  .section-head h2{
-    font-family: var(--serif);
-    font-size: 1.18rem;
-    font-weight: 600;
-    margin: 0;
-  }
-  .section-head .hint{
-    margin-left: auto;
-    font-size: 0.78rem;
-    color: var(--ink-soft);
-    font-family: var(--mono);
-  }
+  .section-head h2{ font-family: var(--serif); font-size: 1.18rem; font-weight: 600; margin: 0; }
 
   .field{ margin-bottom: 1rem; }
   .field:last-child{ margin-bottom: 0; }
-  .field label.main{
-    display:block;
-    font-size: 0.88rem;
-    font-weight: 600;
-    margin-bottom: 0.3rem;
-  }
-  .field .note{
-    display:block;
-    font-size: 0.78rem;
-    color: var(--ink-soft);
-    margin-top: 0.3rem;
-  }
+  .field label.main{ display:block; font-size: 0.88rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .field .note{ display:block; font-size: 0.78rem; color: var(--ink-soft); margin-top: 0.3rem; }
 
-  .row{
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0.6rem;
-  }
+  .row{ display: grid; grid-template-columns: 1fr auto; gap: 0.6rem; }
   .row.three{ grid-template-columns: 1fr 1fr; }
 
   input[type="number"], input[type="text"], select{
-    width: 100%;
-    font-family: var(--mono);
-    font-size: 0.95rem;
-    padding: 0.55rem 0.65rem;
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius);
-    background: #fff;
-    color: var(--ink);
+    width: 100%; font-family: var(--mono); font-size: 0.95rem;
+    padding: 0.55rem 0.65rem; border: 1px solid var(--line-strong);
+    border-radius: var(--radius); background: #fff; color: var(--ink);
   }
   select{ font-family: var(--sans); }
-  input:focus, select:focus, button:focus, [tabindex]:focus{
-    outline: 2px solid var(--highlight);
-    outline-offset: 1px;
-  }
+  input:focus, select:focus, button:focus{ outline: 2px solid var(--highlight); outline-offset: 1px; }
 
   .radio-group{ display:flex; flex-wrap: wrap; gap: 0.9rem 1.4rem; margin-top: 0.2rem; }
-  .radio-group label{
-    display:flex; align-items:center; gap:0.4rem;
-    font-size: 0.88rem; cursor:pointer;
-  }
+  .radio-group label{ display:flex; align-items:center; gap:0.4rem; font-size: 0.88rem; cursor:pointer; }
   .checkbox-line{ display:flex; align-items:flex-start; gap: 0.55rem; }
   .checkbox-line input{ width:auto; margin-top: 0.2rem; }
   .checkbox-line label{ font-size: 0.88rem; font-weight:600; cursor:pointer; }
 
-  .subfield-block{
-    border-left: 2px solid var(--line);
-    padding-left: 0.85rem;
-    margin-top: 0.7rem;
-  }
+  .subfield-block{ border-left: 2px solid var(--line); padding-left: 0.85rem; margin-top: 0.7rem; }
 
-  details.advanced{
-    margin-top: 0.4rem;
-    border-top: 1px dashed var(--line);
-    padding-top: 0.8rem;
-  }
-  details.advanced summary{
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--primary);
-  }
+  details.advanced{ margin-top: 0.4rem; border-top: 1px dashed var(--line); padding-top: 0.8rem; }
+  details.advanced summary{ cursor: pointer; font-size: 0.85rem; font-weight: 600; color: var(--primary); }
   details.advanced .row{ margin-top: 0.8rem; }
 
   .btn-row{ display:flex; gap: 0.7rem; margin-top: 0.4rem; }
   button.ghost{
-    font-family: var(--sans);
-    font-size: 0.82rem;
-    font-weight: 600;
-    background: transparent;
-    border: 1px solid var(--line-strong);
-    color: var(--ink);
-    padding: 0.5rem 0.9rem;
-    border-radius: var(--radius);
-    cursor: pointer;
+    font-family: var(--sans); font-size: 0.82rem; font-weight: 600;
+    background: transparent; border: 1px solid var(--line-strong);
+    color: var(--ink); padding: 0.5rem 0.9rem; border-radius: var(--radius); cursor: pointer;
   }
   button.ghost:hover{ border-color: var(--primary); color: var(--primary); }
 
   /* ============================= RESULTS PANEL ============================= */
-  .results-panel{
-    position: sticky;
-    top: 1rem;
-  }
+  .results-panel{ position: sticky; top: 1rem; }
   @media (max-width: 900px){ .results-panel{ position: static; } }
 
-  .verdict-card{
-    background: var(--ink);
-    color: var(--paper-raised);
-    border-radius: var(--radius);
-    padding: 1.5rem 1.6rem;
-    margin-bottom: 1.25rem;
-  }
+  .verdict-card{ background: var(--ink); color: var(--paper-raised); border-radius: var(--radius); padding: 1.5rem 1.6rem; margin-bottom: 1.25rem; }
   .verdict-card .eyebrow{ color: var(--highlight); }
-  .verdict-card .verdict-figure{
-    font-family: var(--serif);
-    font-weight: 700;
-    font-size: clamp(1.7rem, 3.4vw, 2.3rem);
-    margin: 0.15rem 0 0.35rem;
-  }
+  .verdict-card .verdict-figure{ font-family: var(--serif); font-weight: 700; font-size: clamp(1.7rem, 3.4vw, 2.3rem); margin: 0.15rem 0 0.35rem; }
   .verdict-card .verdict-figure.positive{ color: #8FD9B4; }
   .verdict-card .verdict-figure.negative{ color: #E8A98E; }
   .verdict-card p.explain{ margin: 0.2rem 0 0; font-size: 0.88rem; color: #CBD3CC; }
 
   .bars{ margin-top: 1.1rem; }
   .bar-row{ margin-bottom: 0.7rem; }
-  .bar-label{
-    display:flex; justify-content: space-between;
-    font-family: var(--mono); font-size: 0.78rem;
-    margin-bottom: 0.25rem; color: #CBD3CC;
-  }
+  .bar-label{ display:flex; justify-content: space-between; font-family: var(--mono); font-size: 0.78rem; margin-bottom: 0.25rem; color: #CBD3CC; }
   .bar-track{ background: rgba(255,255,255,0.12); border-radius: 3px; height: 10px; overflow:hidden; }
   .bar-fill{ height: 100%; border-radius: 3px; width: 0%; }
   .bar-fill.lease{ background: var(--highlight); }
   .bar-fill.alt{ background: #6E7C77; }
 
-  .ledger-card{
-    background: var(--paper-raised);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 1.2rem 1.4rem 1.4rem;
-    margin-bottom: 1.25rem;
-  }
-  .ledger-card h3{
-    font-family: var(--serif);
-    font-size: 1.02rem;
-    font-weight: 600;
-    margin: 0 0 0.8rem;
-  }
+  .ledger-card{ background: var(--paper-raised); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.2rem 1.4rem 1.4rem; margin-bottom: 1.25rem; }
+  .ledger-card h3{ font-family: var(--serif); font-size: 1.02rem; font-weight: 600; margin: 0 0 0.8rem; }
   table.ledger{ width:100%; border-collapse: collapse; font-size: 0.86rem; }
-  table.ledger td, table.ledger th{
-    padding: 0.42rem 0.15rem;
-    text-align: left;
-  }
-  table.ledger th{
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--ink-soft);
-    border-bottom: 1px solid var(--line-strong);
-  }
+  table.ledger td, table.ledger th{ padding: 0.42rem 0.15rem; text-align: left; }
+  table.ledger th{ font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); border-bottom: 1px solid var(--line-strong); }
   table.ledger td.num, table.ledger th.num{ text-align: right; font-family: var(--mono); }
   table.ledger tr.subtotal td{ border-top: 1px solid var(--line); font-weight:600; }
   table.ledger tr.total td{ border-top: 3px double var(--line-strong); font-weight: 700; }
   table.ledger tr.muted td{ color: var(--ink-soft); font-size: 0.82rem; }
 
-  .empty-state{
-    background: var(--paper-raised);
-    border: 1px dashed var(--line-strong);
-    border-radius: var(--radius);
-    padding: 2rem 1.5rem;
-    text-align:center;
-    color: var(--ink-soft);
-    font-size: 0.92rem;
-  }
+  .empty-state{ background: var(--paper-raised); border: 1px dashed var(--line-strong); border-radius: var(--radius); padding: 2rem 1.5rem; text-align:center; color: var(--ink-soft); font-size: 0.92rem; }
 
-  footer.disclaimer{
-    margin-top: 2rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--line);
-    font-size: 0.78rem;
-    color: var(--ink-soft);
-    max-width: 90ch;
-  }
+  footer.disclaimer{ margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--line); font-size: 0.78rem; color: var(--ink-soft); max-width: 90ch; }
   footer.disclaimer p{ margin: 0.4rem 0; }
-
   .hidden{ display:none !important; }
 </style>
 </head>
@@ -304,10 +201,21 @@
   <header class="masthead">
     <p class="eyebrow">Salary packaging worksheet — Australia</p>
     <h1>Novated Lease Ledger</h1>
-    <p>Fill in the numbers exactly as they were quoted or as you know them — pick whatever time period matches
-      your paperwork (weekly, fortnightly, monthly or yearly). The ledger converts everything for you and
-      shows the real effect on your take-home pay, compared with buying the car outright.</p>
+    <p>Fill in the numbers exactly as they were quoted or as you know them. The ledger converts everything for you and shows the real effect on your take-home pay, compared with buying the car outright.</p>
   </header>
+
+  <!-- User Guide Section -->
+  <section class="guide-card">
+    <h2>How to read your quote (Sample Guide)</h2>
+    <p>We've pre-filled the calculator below using a real <strong>SG Fleet quote for a 2026 ZEEKR 7X</strong>. If you are holding your own quote, here is where to find the numbers to overwrite ours:</p>
+    <ul>
+      <li><strong>Income & Pay Cycle:</strong> Look at your "Indicative quote" summary. Our sample assumes a $190,000 salary paid "Bi-monthly" (which means 24 pay cycles a year).</li>
+      <li><strong>FBT Base Value vs. Amount Financed:</strong> A lease removes GST from the purchase price. Our sample vehicle costs $75,244.41, but after GST savings, the actual <strong>Amount Financed</strong> is $69,269.81. Ensure you use the ex-GST amount financed. If your car is <em>not</em> an EV, you will need the full drive-away price for the "FBT Base Value" field.</li>
+      <li><strong>Running Costs:</strong> Look at "Package inclusions". Add up Fuel, Tyres, Servicing, Registration, and Insurance. In our sample, this totals $235.15 per cycle.</li>
+      <li><strong>Admin Fee:</strong> Usually called a "Package management fee". Our sample charges $7.50 per cycle.</li>
+      <li><strong>Interest Rate:</strong> Check the "Lease details" box. Our sample uses 9.28%. If your quote hides the rate, switch to "I know the quoted repayment amount" and the calculator will find the rate for you.</li>
+    </ul>
+  </section>
 
   <div class="layout">
 
@@ -322,19 +230,19 @@
           <span class="section-num">1</span>
           <h2>Your income</h2>
         </div>
-
         <div class="field">
           <label class="main" for="salaryAmount">Gross salary (before tax)</label>
           <div class="row">
-            <input type="number" id="salaryAmount" min="0" step="1" value="95000">
+            <input type="number" id="salaryAmount" min="0" step="1" value="190000">
             <select id="salaryFreq" aria-label="Salary period">
               <option value="annual" selected>per year</option>
               <option value="monthly">per month</option>
+              <option value="bimonthly">bi-monthly (24/yr)</option>
               <option value="fortnightly">per fortnight</option>
               <option value="weekly">per week</option>
             </select>
           </div>
-          <span class="note">Enter it however your payslip or contract shows it — annual salary, monthly, fortnightly or weekly. We convert it to an annual figure automatically.</span>
+          <span class="note">Enter it however your payslip or contract shows it.</span>
         </div>
       </section>
 
@@ -346,15 +254,9 @@
         </div>
 
         <div class="field">
-          <label class="main" for="carPrice">Vehicle drive-away price</label>
-          <input type="number" id="carPrice" min="0" step="1" value="55000">
-          <span class="note">The full price including on-road costs — this is also used as the base value for the FBT calculation.</span>
-        </div>
-
-        <div class="field">
-          <label class="main" for="deposit">Upfront payment / trade-in (optional)</label>
-          <input type="number" id="deposit" min="0" step="1" value="0">
-          <span class="note">Any amount paid upfront that reduces the amount actually financed under the lease. Leave as 0 if none.</span>
+          <label class="main" for="financedAmount">Amount Financed (ex GST)</label>
+          <input type="number" id="financedAmount" min="0" step="1" value="69269.81">
+          <span class="note">Look for "Total amount financed" on your quote (usually the price minus GST savings and deposits).</span>
         </div>
 
         <div class="field">
@@ -362,28 +264,27 @@
           <select id="leaseTerm">
             <option value="1">1 year</option>
             <option value="2">2 years</option>
-            <option value="3" selected>3 years</option>
+            <option value="3">3 years</option>
             <option value="4">4 years</option>
-            <option value="5">5 years</option>
+            <option value="5" selected>5 years</option>
           </select>
         </div>
 
         <div class="field">
           <label class="main">Residual (balloon) value</label>
           <div class="radio-group">
-            <label><input type="radio" name="residualMode" value="ato" checked> Use ATO minimum residual (automatic)</label>
-            <label><input type="radio" name="residualMode" value="custom"> Enter my own residual</label>
+            <label><input type="radio" name="residualMode" value="ato"> Use ATO minimum (automatic)</label>
+            <label><input type="radio" name="residualMode" value="custom" checked> Enter my own residual</label>
           </div>
           <div class="subfield-block hidden" id="residualCustomBlock">
             <div class="row">
-              <input type="number" id="residualCustomValue" min="0" step="1" value="0">
+              <input type="number" id="residualCustomValue" min="0" step="0.01" value="28.13">
               <select id="residualCustomType">
                 <option value="percent">% of amount financed</option>
                 <option value="dollar">$ amount</option>
               </select>
             </div>
           </div>
-          <span class="note">The ATO's minimum residual schedule is used by default (e.g. 46.88% for a 3-year lease). Use your own figure if your leasing company quoted a different residual.</span>
         </div>
 
         <div class="field">
@@ -392,22 +293,21 @@
             <label><input type="radio" name="financeMode" value="rate" checked> I know the interest rate</label>
             <label><input type="radio" name="financeMode" value="repayment"> I know the quoted repayment amount</label>
           </div>
-
           <div class="subfield-block" id="financeRateBlock">
             <label class="main" for="interestRate">Interest rate (per annum)</label>
             <div class="row">
-              <input type="number" id="interestRate" min="0" step="0.01" value="7.90">
+              <input type="number" id="interestRate" min="0" step="0.01" value="9.28">
               <span style="align-self:center; font-family: var(--mono); color: var(--ink-soft);">% p.a.</span>
             </div>
           </div>
-
           <div class="subfield-block hidden" id="financeRepaymentBlock">
             <label class="main" for="repaymentAmount">Quoted repayment amount</label>
             <div class="row">
               <input type="number" id="repaymentAmount" min="0" step="1" value="0">
               <select id="repaymentFreqKnown">
                 <option value="weekly">per week</option>
-                <option value="fortnightly" selected>per fortnight</option>
+                <option value="fortnightly">per fortnight</option>
+                <option value="bimonthly">per bi-monthly cycle (24/yr)</option>
                 <option value="monthly">per month</option>
                 <option value="annual">per year</option>
               </select>
@@ -420,10 +320,10 @@
           <label class="main" for="dealFreq">Show my repayments &amp; deductions per</label>
           <select id="dealFreq">
             <option value="weekly">week</option>
-            <option value="fortnightly" selected>fortnight</option>
+            <option value="fortnightly">fortnight</option>
+            <option value="bimonthly" selected>bi-monthly (24/yr)</option>
             <option value="monthly">month</option>
           </select>
-          <span class="note">Matches how most payroll systems take the salary-sacrifice deduction each pay cycle.</span>
         </div>
       </section>
 
@@ -437,24 +337,30 @@
         <div class="field">
           <label class="main" for="runningCostAmount">Fuel/charging, servicing, tyres, rego &amp; insurance (bundled)</label>
           <div class="row">
-            <input type="number" id="runningCostAmount" min="0" step="1" value="3800">
+            <input type="number" id="runningCostAmount" min="0" step="0.01" value="235.15">
             <select id="runningCostFreq">
               <option value="weekly">per week</option>
               <option value="fortnightly">per fortnight</option>
+              <option value="bimonthly" selected>per bi-monthly cycle</option>
               <option value="monthly">per month</option>
-              <option value="annual" selected>per year</option>
+              <option value="annual">per year</option>
             </select>
           </div>
-          <span class="note">Most novated lease quotes bundle these into a single running-cost budget — use that figure, or your own estimate, in whatever period suits.</span>
+          <span class="note">Most novated lease quotes bundle these into a single running-cost budget.</span>
         </div>
 
         <div class="field">
           <label class="main" for="adminFee">Leasing company admin/management fee (optional)</label>
           <div class="row">
-            <input type="number" id="adminFee" min="0" step="1" value="0">
-            <span style="align-self:center; font-family: var(--mono); color: var(--ink-soft);">$ / year</span>
+            <input type="number" id="adminFee" min="0" step="0.01" value="7.50">
+            <select id="adminFeeFreq">
+              <option value="weekly">per week</option>
+              <option value="fortnightly">per fortnight</option>
+              <option value="bimonthly" selected>per bi-monthly cycle</option>
+              <option value="monthly">per month</option>
+              <option value="annual">per year</option>
+            </select>
           </div>
-          <span class="note">Only if your quote lists this as a separate yearly line item.</span>
         </div>
       </section>
 
@@ -466,41 +372,47 @@
         </div>
 
         <div class="field checkbox-line">
-          <input type="checkbox" id="evExempt">
+          <input type="checkbox" id="evExempt" checked>
           <label for="evExempt">This is an FBT-exempt electric vehicle</label>
         </div>
         <span class="note" style="display:block; margin: -0.5rem 0 1rem 1.7rem;">
-          As at 2026, only battery-electric and hydrogen vehicles under the luxury car tax threshold for
-          fuel-efficient vehicles qualify (plug-in hybrids lost eligibility from 1 April 2025). Confirm current
-          eligibility with your employer or leasing provider — the exemption has been under government review.
+          Only eligible EVs/PHEVs under the luxury car tax threshold qualify.
         </span>
 
-        <div class="field" id="ecmField">
-          <label class="main">FBT method</label>
-          <div class="radio-group">
-            <label><input type="radio" name="ecmMode" value="ecm" checked> Employee Contribution Method (post-tax contribution reduces FBT to nil)</label>
-            <label><input type="radio" name="ecmMode" value="noEcm"> No employee contribution (FBT funded entirely pre-tax)</label>
-          </div>
-          <span class="note">Almost all Australian novated leases use the Employee Contribution Method (ECM) because it's the most tax-effective option — that's the default here.</span>
-        </div>
-
-        <details class="advanced">
-          <summary>Advanced: FBT constants (only change these if your provider tells you to)</summary>
-          <div class="row three">
-            <div class="field">
-              <label class="main" for="statRate">Statutory rate</label>
-              <input type="number" id="statRate" min="0" step="0.1" value="20">
-            </div>
-            <div class="field">
-              <label class="main" for="fbtRate">FBT rate</label>
-              <input type="number" id="fbtRate" min="0" step="0.1" value="47">
-            </div>
-          </div>
+        <div id="fbtInputsBlock" class="hidden">
           <div class="field">
-            <label class="main" for="grossUpRate">Type 1 gross-up rate</label>
-            <input type="number" id="grossUpRate" min="0" step="0.0001" value="2.0802">
+            <label class="main" for="fbtBaseValue">FBT Base Value</label>
+            <input type="number" id="fbtBaseValue" min="0" step="1" value="75244">
+            <span class="note">For non-exempt vehicles, this is usually the full drive-away price of the car (including GST), not the financed amount.</span>
           </div>
-        </details>
+
+          <div class="field" id="ecmField">
+            <label class="main">FBT method</label>
+            <div class="radio-group">
+              <label><input type="radio" name="ecmMode" value="ecm" checked> Employee Contribution Method (ECM)</label>
+              <label><input type="radio" name="ecmMode" value="noEcm"> No employee contribution</label>
+            </div>
+            <span class="note">ECM uses post-tax contributions to reduce FBT to nil. It is the default for almost all Australian leases.</span>
+          </div>
+
+          <details class="advanced">
+            <summary>Advanced: FBT constants</summary>
+            <div class="row three">
+              <div class="field">
+                <label class="main" for="statRate">Statutory rate</label>
+                <input type="number" id="statRate" min="0" step="0.1" value="20">
+              </div>
+              <div class="field">
+                <label class="main" for="fbtRate">FBT rate</label>
+                <input type="number" id="fbtRate" min="0" step="0.1" value="47">
+              </div>
+            </div>
+            <div class="field">
+              <label class="main" for="grossUpRate">Type 1 gross-up rate</label>
+              <input type="number" id="grossUpRate" min="0" step="0.0001" value="2.0802">
+            </div>
+          </details>
+        </div>
       </section>
 
       <!-- 5. COMPARISON -->
@@ -522,7 +434,7 @@
               <input type="number" id="altInterestRate" min="0" step="0.01" value="9.50">
               <span style="align-self:center; font-family: var(--mono); color: var(--ink-soft);">% p.a.</span>
             </div>
-            <span class="note">Assumes the same vehicle price and term as above, fully paid off (no balloon), for a fair comparison. Paying cash? Set this to 0.</span>
+            <span class="note">Assumes the same financed amount and term as above, fully paid off (no balloon). Paying cash? Set this to 0.</span>
           </div>
         </div>
       </section>
@@ -542,16 +454,7 @@
   </div>
 
   <footer class="disclaimer">
-    <p><strong>How to read this:</strong> this ledger is a planning tool, not tax or financial advice. It uses
-      simplified assumptions common to retail novated lease quotes: the ATO statutory formula method for FBT
-      (based on the vehicle's drive-away price, held for a full year); 2026–27 Australian resident income tax
-      brackets plus the Medicare levy (assuming a single person with no dependents, so the low-income levy
-      phase-in and family thresholds may not match your exact situation) and the Low Income Tax Offset; a flat
-      nominal interest rate applied evenly across each pay period; and no allowance for HECS/HELP repayments,
-      the Medicare Levy Surcharge, or private health insurance rebates, all of which can also change with your
-      taxable income.</p>
-    <p>Tax rules, FBT settings and the EV exemption are all subject to change — check the figures against a
-      quote from your employer's salary packaging provider, or a registered tax agent, before you commit.</p>
+    <p><strong>How to read this:</strong> this ledger is a planning tool, not tax or financial advice. It uses simplified assumptions common to retail novated lease quotes: the ATO statutory formula method for FBT; 2026–27 Australian resident income tax brackets plus the Medicare levy (assuming a single person with no dependents) and the Low Income Tax Offset; a flat nominal interest rate applied evenly across each pay period; and no allowance for HECS/HELP repayments.</p>
   </footer>
 
 </div>
@@ -559,57 +462,38 @@
 <script>
 /* =====================================================================
    NOVATED LEASE CALCULATOR — CORE LOGIC
-   All monetary results are derived from the form inputs below; nothing
-   is hard-coded except the regulatory constants noted inline.
    ===================================================================== */
 
-// ---- Frequency helpers -------------------------------------------------
-// Number of pay/billing periods in a year for each supported cadence.
-const FREQ_PER_YEAR = { weekly: 52, fortnightly: 26, monthly: 12, annual: 1 };
-const FREQ_LABEL = { weekly: "week", fortnightly: "fortnight", monthly: "month", annual: "year" };
+const FREQ_PER_YEAR = { weekly: 52, fortnightly: 26, bimonthly: 24, monthly: 12, annual: 1 };
+const FREQ_LABEL = { weekly: "week", fortnightly: "fortnight", bimonthly: "bi-month", monthly: "month", annual: "year" };
 
 function toAnnual(amount, freq) { return amount * FREQ_PER_YEAR[freq]; }
 function fromAnnual(amount, freq) { return amount / FREQ_PER_YEAR[freq]; }
 
-// ---- ATO minimum residual value percentages (novated lease standard) --
-// Long-standing ATO guideline minimums, unchanged for many years.
 const ATO_RESIDUAL = { 1: 0.6563, 2: 0.5625, 3: 0.4688, 4: 0.3750, 5: 0.2813 };
 
-// ---- Currency / number formatting --------------------------------------
 const AUD0 = new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD", maximumFractionDigits: 0 });
 const AUD2 = new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD", maximumFractionDigits: 2 });
 
-// ---- Loan/lease amortisation with a residual (balloon) payment --------
-// Solves for the periodic payment M given principal P, residual R,
-// a nominal annual rate, the repayment frequency and the term in years.
-// Standard formula: P = M * [1-(1+r)^-n]/r + R * (1+r)^-n
 function paymentWithResidual(P, R, annualRatePct, freq, years) {
   const n = FREQ_PER_YEAR[freq] * years;
   const r = (annualRatePct / 100) / FREQ_PER_YEAR[freq];
   if (n <= 0) return 0;
-  if (Math.abs(r) < 1e-9) return (P - R) / n; // 0% interest edge case
+  if (Math.abs(r) < 1e-9) return (P - R) / n;
   const factor = Math.pow(1 + r, -n);
   return (P - R * factor) * r / (1 - factor);
 }
 
-// ---- Back-solve the implied nominal annual rate from a known repayment -
-// Uses bisection since there's no closed-form inverse for the annuity formula.
 function impliedAnnualRate(P, R, M, freq, years) {
   const n = FREQ_PER_YEAR[freq] * years;
   if (n <= 0 || M <= 0) return 0;
-
-  function paymentAt(rateAnnualPct) {
-    return paymentWithResidual(P, R, rateAnnualPct, freq, years);
-  }
-
-  let lo = 0, hi = 60; // search between 0% and 60% p.a., far beyond realistic rates
+  function paymentAt(rateAnnualPct) { return paymentWithResidual(P, R, rateAnnualPct, freq, years); }
+  let lo = 0, hi = 60;
   let payLo = paymentAt(lo);
-  if (M <= payLo) return 0; // quoted repayment is at/below the 0%-interest payment
-
+  if (M <= payLo) return 0;
   let payHi = paymentAt(hi);
   let guard = 0;
   while (payHi < M && guard < 10) { hi *= 1.5; payHi = paymentAt(hi); guard++; }
-
   for (let i = 0; i < 70; i++) {
     const mid = (lo + hi) / 2;
     if (paymentAt(mid) < M) lo = mid; else hi = mid;
@@ -617,8 +501,6 @@ function impliedAnnualRate(P, R, M, freq, years) {
   return (lo + hi) / 2;
 }
 
-// ---- Australian resident income tax, 2026–27 financial year -----------
-// Rates current from 1 July 2026 (16% bracket reduced to 15%).
 const TAX_BRACKETS_2026_27 = [
   { upTo: 18200,      rate: 0.00 },
   { upTo: 45000,      rate: 0.15 },
@@ -641,7 +523,6 @@ function incomeTax(taxableIncome) {
   return tax;
 }
 
-// Low Income Tax Offset (LITO) — reduces income tax payable, not the Medicare levy.
 function lito(taxableIncome) {
   if (taxableIncome <= 37500) return 700;
   if (taxableIncome <= 45000) return Math.max(0, 700 - 0.05 * (taxableIncome - 37500));
@@ -649,17 +530,14 @@ function lito(taxableIncome) {
   return 0;
 }
 
-// Medicare levy (2%) with the standard low-income phase-in.
-// Simplified to a single person with no dependents — family thresholds differ.
 function medicareLevy(taxableIncome) {
-  const lower = 28011;          // 2026-27 single lower threshold
-  const upper = lower / 0.9;    // phase-in ceiling before the full 2% applies
+  const lower = 28011;
+  const upper = lower / 0.9;
   if (taxableIncome <= lower) return 0;
   if (taxableIncome <= upper) return 0.10 * (taxableIncome - lower);
   return 0.02 * taxableIncome;
 }
 
-// Combined income tax + Medicare levy, net of LITO.
 function totalTaxAndLevy(taxableIncome) {
   const grossTax = incomeTax(taxableIncome);
   const offset = lito(taxableIncome);
@@ -684,15 +562,14 @@ const radioVal = (name) => {
   return checked ? checked.value : null;
 };
 
-// Show/hide conditional field blocks based on current selections.
 function updateVisibility() {
   el("residualCustomBlock").classList.toggle("hidden", radioVal("residualMode") !== "custom");
   el("financeRateBlock").classList.toggle("hidden", radioVal("financeMode") !== "rate");
   el("financeRepaymentBlock").classList.toggle("hidden", radioVal("financeMode") !== "repayment");
   el("comparisonBlock").classList.toggle("hidden", !el("includeComparison").checked);
-
+  
   const isEvExempt = el("evExempt").checked;
-  el("ecmField").classList.toggle("hidden", isEvExempt);
+  el("fbtInputsBlock").classList.toggle("hidden", isEvExempt);
 }
 
 // =====================================================================
@@ -701,25 +578,18 @@ function updateVisibility() {
 function compute() {
   updateVisibility();
 
-  // ---- 1. Income ----
   const salaryAnnual = toAnnual(numVal("salaryAmount"), el("salaryFreq").value);
-
-  // ---- 2. Vehicle & finance ----
-  const carPrice = numVal("carPrice");
-  const deposit = numVal("deposit");
-  const financedAmount = Math.max(0, carPrice - deposit);
+  const financedAmount = numVal("financedAmount");
   const leaseTermYears = parseInt(el("leaseTerm").value, 10);
   const dealFreq = el("dealFreq").value;
 
-  // Basic input check — need at least a salary and a vehicle price to proceed.
-  if (salaryAnnual <= 0 || carPrice <= 0) {
-    resultsPanel.innerHTML = `<div class="empty-state">Enter your income and vehicle price to see your results here.</div>`;
+  if (salaryAnnual <= 0 || financedAmount <= 0) {
+    resultsPanel.innerHTML = `<div class="empty-state">Enter your income and financed amount to see your results.</div>`;
     return;
   }
 
-  // Residual (balloon) value
-  let residualValue;
-  let residualPct;
+  // Residual
+  let residualValue, residualPct;
   if (radioVal("residualMode") === "custom") {
     const customType = el("residualCustomType").value;
     const customValue = numVal("residualCustomValue");
@@ -730,13 +600,13 @@ function compute() {
     residualValue = financedAmount * (residualPct / 100);
   }
 
-  // Finance repayments
+  // Finance
   let annualFinanceCost, periodicFinancePayment, effectiveRatePct, rateWasSupplied;
   if (radioVal("financeMode") === "repayment") {
     const repayAmount = numVal("repaymentAmount");
     const repayFreq = el("repaymentFreqKnown").value;
     annualFinanceCost = toAnnual(repayAmount, repayFreq);
-    periodicFinancePayment = fromAnnual(annualFinanceCost, dealFreq); // simple pro-rata for display
+    periodicFinancePayment = fromAnnual(annualFinanceCost, dealFreq);
     effectiveRatePct = impliedAnnualRate(financedAmount, residualValue, repayAmount, repayFreq, leaseTermYears);
     rateWasSupplied = false;
   } else {
@@ -746,35 +616,33 @@ function compute() {
     rateWasSupplied = true;
   }
 
-  // ---- 3. Running costs ----
+  // Running costs
   const annualRunningCost = toAnnual(numVal("runningCostAmount"), el("runningCostFreq").value);
-  const annualAdminFee = numVal("adminFee");
-
+  const annualAdminFee = toAnnual(numVal("adminFee"), el("adminFeeFreq").value);
   const totalAnnualPackageCost = annualFinanceCost + annualRunningCost + annualAdminFee;
 
-  // ---- 4. FBT & ECM ----
+  // FBT & ECM
   const isEvExempt = el("evExempt").checked;
+  const fbtBaseValue = numVal("fbtBaseValue");
   const statRate = numVal("statRate") / 100;
   const fbtRate = numVal("fbtRate") / 100;
   const grossUpRate = numVal("grossUpRate");
-
-  const fbtBaseValue = carPrice; // ATO statutory formula uses the vehicle's original cost
   const fbtTaxableValue = fbtBaseValue * statRate;
 
-  let ecmContribution = 0;   // post-tax contribution
-  let fbtPayable = 0;        // FBT cost funded pre-tax (no-ECM path)
+  let ecmContribution = 0;
+  let fbtPayable = 0;
   let ecmCapped = false;
 
-  if (isEvExempt) {
-    // No FBT at all — nothing further required.
-  } else if (radioVal("ecmMode") === "ecm") {
-    ecmContribution = fbtTaxableValue;
-    if (ecmContribution > totalAnnualPackageCost) {
-      ecmCapped = true;
-      ecmContribution = totalAnnualPackageCost; // can't contribute more than the package itself
+  if (!isEvExempt) {
+    if (radioVal("ecmMode") === "ecm") {
+      ecmContribution = fbtTaxableValue;
+      if (ecmContribution > totalAnnualPackageCost) {
+        ecmCapped = true;
+        ecmContribution = totalAnnualPackageCost;
+      }
+    } else {
+      fbtPayable = fbtTaxableValue * grossUpRate * fbtRate;
     }
-  } else {
-    fbtPayable = fbtTaxableValue * grossUpRate * fbtRate;
   }
 
   const pretaxDeduction = isEvExempt
@@ -782,7 +650,7 @@ function compute() {
     : (radioVal("ecmMode") === "ecm" ? (totalAnnualPackageCost - ecmContribution) : (totalAnnualPackageCost + fbtPayable));
   const posttaxContribution = ecmContribution;
 
-  // ---- 5. Tax impact ----
+  // Tax impact
   const taxableIncomeBefore = salaryAnnual;
   const taxableIncomeAfter = Math.max(0, salaryAnnual - pretaxDeduction);
 
@@ -792,23 +660,20 @@ function compute() {
 
   const netAnnualCostOfLease = pretaxDeduction + posttaxContribution - taxSaved;
 
-  // ---- 6. Comparison: buying it yourself ----
+  // Comparison
   const includeComparison = el("includeComparison").checked;
   let altAnnualLoanCost = 0, altTotalAnnualCost = 0, altInterestRate = 0;
   if (includeComparison) {
     altInterestRate = numVal("altInterestRate");
     const altPeriodicPayment = paymentWithResidual(financedAmount, 0, altInterestRate, dealFreq, leaseTermYears);
     altAnnualLoanCost = altPeriodicPayment * FREQ_PER_YEAR[dealFreq];
-    altTotalAnnualCost = altAnnualLoanCost + annualRunningCost; // paid fully after tax, no packaging benefit
+    altTotalAnnualCost = altAnnualLoanCost + annualRunningCost; 
   }
 
-  const comparisonDelta = altTotalAnnualCost - netAnnualCostOfLease; // positive => novated lease is cheaper
+  const comparisonDelta = altTotalAnnualCost - netAnnualCostOfLease;
 
-  // ===================================================================
-  // RENDER RESULTS
-  // ===================================================================
   renderResults({
-    salaryAnnual, carPrice, deposit, financedAmount, leaseTermYears, dealFreq,
+    salaryAnnual, financedAmount, leaseTermYears, dealFreq,
     residualValue, residualPct,
     annualFinanceCost, periodicFinancePayment, effectiveRatePct, rateWasSupplied,
     annualRunningCost, annualAdminFee, totalAnnualPackageCost,
@@ -835,8 +700,8 @@ function renderResults(d) {
         <p class="verdict-figure ${leaseWins ? "positive" : "negative"}">
           ${leaseWins ? "Novated lease saves you" : "Novated lease costs you"} ~${diffAbs} / year
         </p>
-        <p class="explain">Compared with financing the same car yourself at ${d.altInterestRate.toFixed(2)}% p.a.
-          and paying running costs from your take-home pay, over a ${d.leaseTermYears}-year term.</p>
+        <p class="explain">Compared with financing the same amount yourself at ${d.altInterestRate.toFixed(2)}% p.a.
+          over a ${d.leaseTermYears}-year term.</p>
         <div class="bars">
           <div class="bar-row">
             <div class="bar-label"><span>Novated lease — net cost/year</span><span>${AUD0.format(d.netAnnualCostOfLease)}</span></div>
@@ -853,15 +718,12 @@ function renderResults(d) {
       <div class="verdict-card">
         <p class="eyebrow">Net cost of the novated lease</p>
         <p class="verdict-figure">${AUD0.format(d.netAnnualCostOfLease)} / year</p>
-        <p class="explain">≈ ${AUD0.format(fromAnnual(d.netAnnualCostOfLease, d.dealFreq))} per ${freqLabel}, after accounting for the tax you save.
-          Tick "Show a comparison" to see this against buying the car yourself.</p>
+        <p class="explain">≈ ${AUD0.format(fromAnnual(d.netAnnualCostOfLease, d.dealFreq))} per ${freqLabel}, after accounting for the tax you save.</p>
       </div>`;
   }
 
   // --- Vehicle & finance ledger ---
-  const rateSourceNote = d.rateWasSupplied
-    ? `entered directly`
-    : `estimated from your quoted repayment`;
+  const rateSourceNote = d.rateWasSupplied ? `entered directly` : `estimated from your quoted repayment`;
   const financeHtml = `
     <div class="ledger-card">
       <h3>Vehicle &amp; finance</h3>
@@ -875,7 +737,7 @@ function renderResults(d) {
     </div>`;
 
   // --- Package cost & FBT ledger ---
-  let fbtRow;
+  let fbtRow = "";
   if (d.isEvExempt) {
     fbtRow = `<tr><td>FBT</td><td class="num">Exempt (eligible EV)</td></tr>`;
   } else if (d.ecmContribution > 0) {
@@ -883,9 +745,7 @@ function renderResults(d) {
   } else {
     fbtRow = `<tr><td>FBT payable (funded pre-tax)</td><td class="num">${AUD0.format(d.fbtPayable)}</td></tr>`;
   }
-  const cappedNote = d.ecmCapped
-    ? `<tr class="muted"><td colspan="2">Note: the required ECM contribution exceeded the total package cost, so it was capped — double-check this scenario with your provider.</td></tr>`
-    : "";
+  const cappedNote = d.ecmCapped ? `<tr class="muted"><td colspan="2">Note: the required ECM contribution exceeded the total package cost, so it was capped.</td></tr>` : "";
 
   const packageHtml = `
     <div class="ledger-card">
@@ -916,10 +776,10 @@ function renderResults(d) {
       </table>
     </div>`;
 
-  // --- Per-pay-cycle breakdown table (all frequencies at once) ---
-  const freqRows = ["weekly", "fortnightly", "monthly", "annual"].map(f => `
+  // --- Per-pay-cycle breakdown table ---
+  const freqRows = ["weekly", "fortnightly", "bimonthly", "monthly", "annual"].map(f => `
     <tr>
-      <td style="text-transform:capitalize">${f}</td>
+      <td style="text-transform:capitalize">${f === "bimonthly" ? "Bi-monthly (24/yr)" : f}</td>
       <td class="num">${AUD0.format(fromAnnual(d.pretaxDeduction, f))}</td>
       <td class="num">${AUD0.format(fromAnnual(d.posttaxContribution, f))}</td>
       <td class="num">${AUD0.format(fromAnnual(d.netAnnualCostOfLease, f))}</td>
@@ -942,7 +802,6 @@ function renderResults(d) {
   resultsPanel.innerHTML = verdictHtml + financeHtml + packageHtml + payHtml + breakdownHtml;
 }
 
-// Helper for the comparison bar widths — scales both bars against whichever is larger.
 function barWidth(value, otherValue) {
   const max = Math.max(value, otherValue, 1);
   return Math.max(2, Math.min(100, (value / max) * 100)).toFixed(1);
@@ -957,8 +816,7 @@ form.addEventListener("change", compute);
 el("resetBtn").addEventListener("click", () => {
   el("salaryFreq").value = "annual";
   el("salaryAmount").value = 95000;
-  el("carPrice").value = 55000;
-  el("deposit").value = 0;
+  el("financedAmount").value = 55000;
   el("leaseTerm").value = "3";
   form.querySelector('input[name="residualMode"][value="ato"]').checked = true;
   el("residualCustomType").value = "percent";
@@ -971,7 +829,9 @@ el("resetBtn").addEventListener("click", () => {
   el("runningCostAmount").value = 3800;
   el("runningCostFreq").value = "annual";
   el("adminFee").value = 0;
+  el("adminFeeFreq").value = "annual";
   el("evExempt").checked = false;
+  el("fbtBaseValue").value = 55000;
   form.querySelector('input[name="ecmMode"][value="ecm"]').checked = true;
   el("statRate").value = 20;
   el("fbtRate").value = 47;
@@ -981,7 +841,7 @@ el("resetBtn").addEventListener("click", () => {
   compute();
 });
 
-// Initial render on page load.
+// Initial render
 compute();
 </script>
 </body>
